@@ -20,7 +20,13 @@ public class MessageListener extends ListenerAdapter {
     }
 
     private void checkMessages(org.pircbotx.hooks.types.GenericMessageEvent e) {
-        if (e.getMessage().startsWith("!help")) {
+        for (Command chatCommand : net.esper.bot.cubebot.Bot.commandList) {
+            if (chatCommand.matches(e.getMessage())) {
+                e.getUser().sendMessage(chatCommand.getResponse());
+            }
+        }
+        
+        /*if (e.getMessage().startsWith("!help")) {
             e.getUser().sendMessage("Available Commands:");
             e.getUser().sendMessage("!site,!website - links cubeworld");
             e.getUser().sendMessage("!status - link the status site");
@@ -37,6 +43,6 @@ public class MessageListener extends ListenerAdapter {
 
         if (e.getMessage().startsWith("!techdemo") || e.getMessage().startsWith("!demo")) {
             e.getUser().sendMessage("The Tech demo was linked to in this post https://picroma.com/blog/post/6");
-        }
+        }*/
     }
 }

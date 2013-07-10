@@ -3,6 +3,7 @@ package net.esper.bot.cubebot;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -12,12 +13,12 @@ public class Bot {
 
     private static String[] channelList = {/*"cubeworld", */"cubeworld-status", "beserk"};
     private static Integer channelSize = channelList.length;
-    private static List<Command> commandList;
+    public static List<Command> commandList;
 
     public static void main(String[] args) {
-
         Properties config;
         Properties commands;
+        commandList = new LinkedList<Command>();
 
         try {
             if (!new File("config.properties").exists()) {
@@ -51,6 +52,8 @@ public class Bot {
                 }
 
                 commandIndex++;
+                
+                commandList.add(currentCommand);
             }
 
             PircBotX bot = new PircBotX();

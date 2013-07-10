@@ -29,6 +29,10 @@ public class Command {
         this.aliases = new LinkedList<String>();
     }
 
+    public String getResponse() {
+        return response;
+    }
+
     /**
      * This function is used to see if a particular command word matches this
      * command's name or any of its aliases. Design does not compensate for
@@ -60,4 +64,6 @@ public class Command {
         
         aliases.add(alias);
     }
+    
+    
 }
