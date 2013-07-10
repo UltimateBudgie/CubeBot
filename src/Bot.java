@@ -8,7 +8,7 @@ import org.pircbotx.PircBotX;
 
 public class Bot {
 
-    static String[] channelList = {/*"cubeworld", */"cubeworld-status"};
+    static String[] channelList = {/*"cubeworld", */"cubeworld-status", "beserk"};
     static Integer channelSize = channelList.length;
 
     public static void main(String[] args) {
