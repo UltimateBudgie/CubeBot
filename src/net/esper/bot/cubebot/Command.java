@@ -11,22 +11,20 @@ public class Command {
     /**
      * Command name - registered command word with which a standard response is given.
      */
-    private String name;
+    protected String name;
     
     /**
      * Standard, static response for a command word and set of aliases.
      */
-    private String response;
+    protected String response;
     
     /**
      * List of aliases for a command, e.g. !techdemo may also be !demo for short
      */
-    private List<String> aliases;
+    protected List<String> aliases;
 
-    public Command(String name, String response) {
-        this.name = name;
-        this.response = response;
-        this.aliases = new LinkedList<String>();
+    public String getName() {
+        return name;
     }
 
     public String getResponse() {
@@ -42,10 +40,12 @@ public class Command {
      * @return True if command matches command name or any alias, else false
      */
     public boolean matches(String command) {
+//        System.err.println("Comparing " + command + " and " + name);
         if (command.matches(name)) {
             return true;
         }
         for (String alias : aliases) {
+//            System.err.println("Comparing " + command + " and " + alias);
             if (command.matches(alias)) {
                 return true;
             }
