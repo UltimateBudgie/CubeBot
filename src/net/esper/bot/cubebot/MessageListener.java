@@ -1,3 +1,4 @@
+package net.esper.bot.cubebot;
 
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.MessageEvent;

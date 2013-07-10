@@ -1,3 +1,4 @@
+package net.esper.bot.cubebot;
 
 import java.util.LinkedList;
 import java.util.List;
