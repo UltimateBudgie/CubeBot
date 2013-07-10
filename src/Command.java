@@ -1,4 +1,5 @@
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,17 +10,23 @@ public class Command {
     /**
      * Command name - registered command word with which a standard response is given.
      */
-    String name;
+    private String name;
     
     /**
      * Standard, static response for a command word and set of aliases.
      */
-    String response;
+    private String response;
     
     /**
      * List of aliases for a command, e.g. !techdemo may also be !demo for short
      */
-    List<String> aliases;
+    private List<String> aliases;
+
+    public Command(String name, String response) {
+        this.name = name;
+        this.response = response;
+        this.aliases = new LinkedList<String>();
+    }
 
     /**
      * This function is used to see if a particular command word matches this
@@ -39,5 +46,17 @@ public class Command {
             }
         }
         return false;
+    }
+    
+    /**
+     * Provide a way to add aliases to this command. Use matches to see if the
+     * command already has the name or has an alias.
+     * @param alias Alias to add to this command.
+     */
+    public void addAlias(String alias) {
+        if (this.matches(alias))
+            return;
+        
+        aliases.add(alias);
     }
 }
