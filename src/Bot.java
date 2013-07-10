@@ -16,10 +16,10 @@ public class Bot
 			if(!new File("config.properties").exists())
 			{
 				props = new Properties();
-				props.setProperty("name", "Cube");
+				props.setProperty("name", "CubeStatus");
 				props.setProperty("network", "irc.esper.net");
-				props.setProperty("channel", "cubeworld");
-				props.setProperty("login", "CubeStatus");
+				props.setProperty("channel", "#cubeworld");
+				props.setProperty("login", "Cube");
 				props.store(new FileOutputStream("config.properties"), null);
 			} else
 			{
