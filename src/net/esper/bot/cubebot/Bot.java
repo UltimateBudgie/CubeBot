@@ -92,36 +92,34 @@ public class Bot {
         p.setProperty("commands.3.alias.0", "minidemo");
         p.setProperty("commands.3.alias.1", "demo");
     }
-    
+
     private static void loadCommands(Properties p) {
         int commandIndex = 0;
-            Command currentCommand = null;
-            while (p.getProperty("commands." + commandIndex + ".name") != null) {
-                String type = p.getProperty("commands." + commandIndex + ".type");
-                String currentCommandString = "commands." + commandIndex;
-                if (type != null) {
-                    if (type.matches("status")) {
-                        currentCommand = new StatusCommand(
-                                p.getProperty(currentCommandString + ".name"),
-                                p.getProperty(currentCommandString + ".text"));
-                    }
-                } else {
-                    currentCommand = new GenericCommand(
+        Command currentCommand = null;
+        while (p.getProperty("commands." + commandIndex + ".name") != null) {
+            String type = p.getProperty("commands." + commandIndex + ".type");
+            String currentCommandString = "commands." + commandIndex;
+            if (type != null) {
+                if (type.matches("status")) {
+                    currentCommand = new StatusCommand(
                             p.getProperty(currentCommandString + ".name"),
                             p.getProperty(currentCommandString + ".text"));
                 }
-                System.err.println("Command " + (commandIndex + 1) + ": " + currentCommand.getName());
-
-                int aliasIndex = 0;
-                while (p.getProperty("commands." + commandIndex + ".alias." + aliasIndex) != null) {
-                    currentCommand.addAlias(p.getProperty("commands." + commandIndex + ".alias." + aliasIndex));
-                    System.err.println("Alias added: " + p.getProperty("commands." + commandIndex + ".alias." + aliasIndex));
-                    aliasIndex++;
-                }
-
-                commandList.add(currentCommand);
-
-                commandIndex++;
+            } else {
+                currentCommand = new GenericCommand(
+                        p.getProperty(currentCommandString + ".name"),
+                        p.getProperty(currentCommandString + ".text"));
             }
+
+            int aliasIndex = 0;
+            while (p.getProperty("commands." + commandIndex + ".alias." + aliasIndex) != null) {
+                currentCommand.addAlias(p.getProperty("commands." + commandIndex + ".alias." + aliasIndex));
+                aliasIndex++;
+            }
+
+            commandList.add(currentCommand);
+
+            commandIndex++;
+        }
     }
 }
