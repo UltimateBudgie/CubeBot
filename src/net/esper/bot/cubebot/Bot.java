@@ -6,13 +6,12 @@ import java.io.FileOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
-
 import org.pircbotx.PircBotX;
-import sun.security.util.Cache;
 
 public class Bot {
 
     private static String[] channelList = {/*"cubeworld", */"cubeworld-status", "beserk"};
+    private static String[] statusChannelList = {"cubeworld-status"};
     private static Integer channelSize = channelList.length;
     public static List<Command> commandList;
 
@@ -20,7 +19,7 @@ public class Bot {
         Properties config;
         Properties commands;
         commandList = new LinkedList<Command>();
-
+        
         try {
             if (!new File("config.properties").exists()) {
                 System.err.println("Generating config file for CubeBot...");
@@ -34,6 +33,8 @@ public class Bot {
                 config.load(new FileInputStream("config.properties"));
                 System.err.println("Config loaded.");
             }
+            
+            Status.setStatusUpdates(Boolean.parseBoolean(config.getProperty("status.updates")));
 
             if (!new File("command.properties").exists()) {
                 System.err.println("Creating commands file for CubeBot...");
@@ -65,7 +66,6 @@ public class Bot {
             }
             bot.getListenerManager().addListener(new MessageListener());
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -74,7 +74,11 @@ public class Bot {
         p.setProperty("network", "irc.esper.net");
         p.setProperty("channels.size", channelSize.toString());
         for (int i = 0; i < channelSize; i++) {
-            p.setProperty("channels." + ((Integer) i).toString(), "#" + channelList[i]);
+            p.setProperty("channels." + i, "#" + channelList[i]);
+        }
+        p.setProperty("status.updates", "true");
+        for (int i = 0; i < statusChannelList.length; i++) {
+            p.setProperty("status.channel." + i, "#" + statusChannelList[i]);
         }
         p.setProperty("login", "Cube");
     }

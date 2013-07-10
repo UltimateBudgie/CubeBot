@@ -26,7 +26,7 @@ public class StatusCommand extends Command {
     public String getResponse() {
         if (Status.getUnixTime() == null || Status.expired()) {
             try {
-                pullData();
+                Status.pullData();
             } catch (Exception ex) {
             }
         }
@@ -38,27 +38,5 @@ public class StatusCommand extends Command {
                 (Status.isRegistrationUp() ? "up" : "down"));
 
         return statusResponse;
-    }
-
-    private void pullData() throws Exception {
-        String address = "http://direct.cyberkitsune.net/canibuycubeworld/status.json";
-        URL newURL = new URL(address);
-        URLConnection newConnection = newURL.openConnection();
-
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(newConnection.getInputStream()));
-        String dataOut = reader.readLine();
-        reader.close();
-        
-        Status.setPicromaUp(Boolean.parseBoolean(dataOut.split(",")[1].split(":")[1]));
-        Status.setRegistrationUp(Boolean.parseBoolean(dataOut.split(",")[2].split(":")[1]));
-        Status.setShopUp(Boolean.parseBoolean(dataOut.split(",")[3].split(":")[1]));
-        
-        System.err.println("Time: " + dataOut.split(",")[0].split(":")[1]);
-        System.err.println("isPicromaUp: " + Status.isPicromaUp());
-        System.err.println("isRegistrationUp: " + Status.isRegistrationUp());
-        System.err.println("isShopUp: " + Status.isShopUp());
-        
-        Status.setUnixTime(Long.parseLong(dataOut.split(",")[0].split(":")[1])); // Set to cyberkitsune timestamp
     }
 }
