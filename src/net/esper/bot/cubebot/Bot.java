@@ -10,8 +10,8 @@ import org.pircbotx.PircBotX;
 
 public class Bot {
 
-    private static String[] channelList = {"cubeworld", "cubeworld-status", "beserk"};
-    private static String[] statusChannelList = {"cubeworld-status"};
+    private static String[] channelList = {"sharpcube", "sharpcube-dev"};
+    private static String[] statusChannelList = {};
     private static Integer channelSize = channelList.length;
     public static List<Command> commandList;
 
@@ -22,7 +22,7 @@ public class Bot {
         
         try {
             if (!new File("config.properties").exists()) {
-                System.err.println("Generating config file for CubeBot...");
+                System.err.println("Generating config file for SharpBot...");
                 config = new Properties();
                 initConfig(config);
                 config.store(new FileOutputStream("config.properties"), null);
@@ -37,13 +37,13 @@ public class Bot {
             Status.setStatusUpdates(Boolean.parseBoolean(config.getProperty("status.updates")));
 
             if (!new File("command.properties").exists()) {
-                System.err.println("Creating commands file for CubeBot...");
+                System.err.println("Creating commands file for SharpBot...");
                 commands = new Properties();
                 initCommands(commands);
                 commands.store(new FileOutputStream("commands.properties"), null);
                 System.err.println("Commands file created successfully.");
             } else {
-                System.err.println("Loading stored commands for CubeBot...");
+                System.err.println("Loading stored commands for SharpBot...");
                 commands = new Properties();
                 commands.load(new FileInputStream("commands.properties"));
                 System.err.println("Commands loaded.");
@@ -87,18 +87,17 @@ public class Bot {
         p.setProperty("commands.0.name", "help");
         p.setProperty("commands.0.text", "Available commands:");
         p.setProperty("commands.0.type", "help");
-        p.setProperty("commands.1.name", "status");
-        p.setProperty("commands.1.type", "status");
-        p.setProperty("commands.2.name", "website");
-        p.setProperty("commands.2.text", "Cube World can be found at https://www.picroma.com/cubeworld");
-        p.setProperty("commands.2.alias.0", "site");
-        p.setProperty("commands.3.name", "techdemo");
-        p.setProperty("commands.3.text", "A link to the Cube World Mini Demo was posted on July 2 at https://www.picroma.com/blog/post/6 - this is only a starting screen with a rotating landscape to see if Cube World will run on your computer.");
-        p.setProperty("commands.3.alias.0", "minidemo");
-        p.setProperty("commands.3.alias.1", "demo");
-        p.setProperty("commands.4.name", "wiki");
-        p.setProperty("commands.4.text", "http://wiki.cubeworldforum.org/index.php?search=%s");
-        p.setProperty("commands.4.alias.0", "search");
+        p.setProperty("commands.1.name", "website");
+        p.setProperty("commands.1.text", "SharpCube can be found at http://sharpcube.org/forums/");
+        p.setProperty("commands.1.alias.0", "site");
+        p.setProperty("commands.2.name", "devbuilds");
+        p.setProperty("commands.2.text", "Builds are due to be available.");
+        p.setProperty("commands.2.alias.0", "builds");
+        p.setProperty("commands.3.name", "wiki");
+        p.setProperty("commands.3.text", "http://sharpcube.org/forums/index.php?app=core&module=search&search_in=forums");
+        p.setProperty("commands.3.alias.0", "search");
+        p.setProperty("commands.4.name", "dev");
+        p.setProperty("commands.4.text", "The SharpCube development channel is #sharpcube-dev");
     }
 
     private static void loadCommands(Properties p) {
