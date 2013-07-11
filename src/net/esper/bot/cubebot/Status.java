@@ -87,6 +87,13 @@ public class Status {
     }
     
     private static void sendIRCNotifications() {
+        String statusMessage = String.format("Data provided by CyberKitsune - "
+                + "Picroma is %s, shop is %s, registration is %s - "
+                + "http://direct.cyberkitsune.net/canibuycubeworld/",
+                (Status.isPicromaUp() ? "up" : "down"), 
+                (Status.isShopUp() ? "up" : "down"), 
+                (Status.isRegistrationUp() ? "up" : "down"));
+        
         
     }
     

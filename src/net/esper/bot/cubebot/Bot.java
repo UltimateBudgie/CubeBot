@@ -85,7 +85,8 @@ public class Bot {
 
     private static void initCommands(Properties p) {
         p.setProperty("commands.0.name", "help");
-        p.setProperty("commands.0.text", "Available commands: " + "!help !status !website !techdemo");
+        p.setProperty("commands.0.text", "Available commands:");
+        p.setProperty("commands.0.type", "help");
         p.setProperty("commands.1.name", "status");
         p.setProperty("commands.1.type", "status");
         p.setProperty("commands.2.name", "website");
@@ -95,6 +96,9 @@ public class Bot {
         p.setProperty("commands.3.text", "A link to the Cube World Mini Demo was posted on July 2 at https://www.picroma.com/blog/post/6 - this is only a starting screen with a rotating landscape to see if Cube World will run on your computer.");
         p.setProperty("commands.3.alias.0", "minidemo");
         p.setProperty("commands.3.alias.1", "demo");
+        p.setProperty("commands.4.name", "wiki");
+        p.setProperty("commands.4.text", "http://wiki.cubeworldforum.org/index.php?search=%s");
+        p.setProperty("commands.4.alias.0", "search");
     }
 
     private static void loadCommands(Properties p) {
@@ -106,6 +110,11 @@ public class Bot {
             if (type != null) {
                 if (type.matches("status")) {
                     currentCommand = new StatusCommand(
+                            p.getProperty(currentCommandString + ".name"),
+                            p.getProperty(currentCommandString + ".text"));
+                }
+                if (type.matches("help")) {
+                    currentCommand = new HelpCommand(
                             p.getProperty(currentCommandString + ".name"),
                             p.getProperty(currentCommandString + ".text"));
                 }

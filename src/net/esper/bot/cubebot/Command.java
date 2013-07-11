@@ -7,21 +7,27 @@ import java.util.List;
  *
  * @author Mark Smullen <marktexnical@gmail.com>
  */
-public class Command {
+public abstract class Command {
     /**
      * Command name - registered command word with which a standard response is given.
      */
-    protected String name;
+    private String name;
     
     /**
      * Standard, static response for a command word and set of aliases.
      */
-    protected String response;
+    private String response;
     
     /**
      * List of aliases for a command, e.g. !techdemo may also be !demo for short
      */
-    protected List<String> aliases;
+    private List<String> aliases;
+    
+    public Command(String name, String response) {
+        this.name = name;
+        this.response = response;
+        this.aliases = new LinkedList<String>();
+    }
 
     public String getName() {
         return name;
@@ -64,6 +70,8 @@ public class Command {
         
         aliases.add(alias);
     }
-    
-    
+
+    public List<String> getAliases() {
+        return aliases;
+    }
 }
