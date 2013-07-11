@@ -1,0 +1,27 @@
+class command
+string name
+list<string> alias
+string response
+
+method matches
+text==name
+foreach alias text==alias
+
+commands.0.name = status
+commands.0.text = it's down forever! :(
+commands.0.alias.0 = webstatus
+commands.1.name = hello
+commands.1.text = hello world!
+commands.2.name = coffee
+commands.2.text = here's some coffee
+commands.2.alias.0 = drink
+commands.2.alias.1 = refreshments
+
+
+
+commands.0.name = help
+commands.0.text = Available commands: foreach commandList.getname
+commands.1.name = status
+commands.1.text = Data provided by CyberKitsune - Picroma is [..], shop is [..], registration is [..] - http://direct.cyberkitsune.net/canibuycubeworld/
+commands.2.name = website
+commands.2.text = 

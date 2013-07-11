@@ -1,0 +1,8 @@
+class command
+string name
+list<string> alias
+string response
+
+method matches
+text==name
+foreach alias text==alias

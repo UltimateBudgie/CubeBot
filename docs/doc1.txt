@@ -1,0 +1,42 @@
+pircbotx
+
+commands
+
+commandname
+
+commandtext
+
+aliases
+
+
+commands.0.name = string
+commands.0.text = string
+commands.0.alias.0 = string
+commands.0.alias.1 = string
+
+
+e.g.
+
+commands.0.name = status
+commands.0.text = it's down forever! :(
+commands.0.alias.0 = webstatus
+commands.1.name = hello
+commands.1.text = hello world!
+commands.2.name = coffee
+commands.2.text = here's some coffee
+commands.2.alias.0 = drink
+commands.2.alias.1 = refreshments
+
+
+Find command
+
+Check command -> check aliases -> check next command -> check aliases
+
+implementation
+
+bool command.matches("text") returns true if matches name or aliases, else false
+for each command, do command.matches("commandtext")
+
+later, register commands and aliases with table, do table.find, reference command class
+
+use initialization function to load commands from config. do not save commands to config until shutdown, limit hard disk access.
