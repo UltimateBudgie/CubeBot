@@ -57,7 +57,8 @@ public class MessageListener extends ListenerAdapter {
 
     private void sendMessage(GenericMessageEvent e, String message, String args, boolean quiet, String targetUser) {
         if (quiet) {
-            e.getUser().sendMessage(message);
+            e.respond(message);
+//            e.getUser().sendMessage(message);
         } else {
             ((MessageEvent) e).getChannel().sendMessage(((targetUser != null) ? (targetUser + ": ") : "") + String.format(message, args));
         }

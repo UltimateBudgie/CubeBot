@@ -70,7 +70,8 @@ public class Bot {
     }
 
     private static void initConfig(Properties p) {
-        p.setProperty("name", "CubeStatus");
+        p.setProperty("login", "Cube");
+        p.setProperty("name", "CubeBot");
         p.setProperty("network", "irc.esper.net");
         p.setProperty("channels.size", channelSize.toString());
         for (int i = 0; i < channelSize; i++) {
@@ -80,7 +81,6 @@ public class Bot {
         for (int i = 0; i < statusChannelList.length; i++) {
             p.setProperty("status.channel." + i, "#" + statusChannelList[i]);
         }
-        p.setProperty("login", "Cube");
     }
 
     private static void initCommands(Properties p) {

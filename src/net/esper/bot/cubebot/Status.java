@@ -109,7 +109,7 @@ public class Status {
         
         setPicromaUp(Boolean.parseBoolean(dataOut.split(",")[1].split(":")[1]));
         setRegistrationUp(Boolean.parseBoolean(dataOut.split(",")[2].split(":")[1]));
-        setShopUp(Boolean.parseBoolean(dataOut.split(",")[3].split(":")[1]));
+        setShopUp(Boolean.parseBoolean(dataOut.split(",")[3].split(":")[1].replace("}", "")));
         
         System.err.println("Time: " + dataOut.split(",")[0].split(":")[1]);
         System.err.println("isPicromaUp: " + isPicromaUp());
