@@ -55,7 +55,7 @@ public class Bot {
 
             PircBotX bot = new PircBotX();
 
-            System.err.println("CubeBot started.");
+            System.err.println("SharpBot started.");
 
             bot.setLogin(config.getProperty("login"));
             bot.setName(config.getProperty("name"));
@@ -70,8 +70,8 @@ public class Bot {
     }
 
     private static void initConfig(Properties p) {
-        p.setProperty("login", "Cube");
-        p.setProperty("name", "CubeBot");
+        p.setProperty("login", "Sharp");
+        p.setProperty("name", "SharpBot");
         p.setProperty("network", "irc.esper.net");
         p.setProperty("channels.size", channelSize.toString());
         for (int i = 0; i < channelSize; i++) {
