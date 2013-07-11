@@ -37,13 +37,13 @@ public class Bot {
             Status.setStatusUpdates(Boolean.parseBoolean(config.getProperty("status.updates")));
 
             if (!new File("command.properties").exists()) {
-                System.err.println("Creating commands file for SharpBot...");
+                System.err.println("Creating commands file for " + config.getProperty("name") + "...");
                 commands = new Properties();
                 initCommands(commands);
                 commands.store(new FileOutputStream("commands.properties"), null);
                 System.err.println("Commands file created successfully.");
             } else {
-                System.err.println("Loading stored commands for SharpBot...");
+                System.err.println("Loading stored commands for " + config.getProperty("name"));
                 commands = new Properties();
                 commands.load(new FileInputStream("commands.properties"));
                 System.err.println("Commands loaded.");
@@ -55,7 +55,7 @@ public class Bot {
 
             PircBotX bot = new PircBotX();
 
-            System.err.println("SharpBot started.");
+            System.err.println(config.getProperty("name") + " started.");
 
             bot.setLogin(config.getProperty("login"));
             bot.setName(config.getProperty("name"));
