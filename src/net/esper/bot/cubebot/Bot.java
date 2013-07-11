@@ -10,7 +10,7 @@ import org.pircbotx.PircBotX;
 
 public class Bot {
 
-    private static String[] channelList = {/*"cubeworld", */"cubeworld-status", "beserk"};
+    private static String[] channelList = {"cubeworld", "cubeworld-status", "beserk"};
     private static String[] statusChannelList = {"cubeworld-status"};
     private static Integer channelSize = channelList.length;
     public static List<Command> commandList;
