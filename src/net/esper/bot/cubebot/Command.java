@@ -90,7 +90,7 @@ public abstract class Command {
         if (getTimeLastUsed() < System.currentTimeMillis() + Bot.THROTTLEDURATION * 1000L)
             return;
         
-        e.respond(((target) ? args[2] + ": " : "") + this.getResponse());
+        e.respond(((target) ? args[1] + ": " : "") + this.getResponse());
         
         updateTimeLastUsed();
     }
