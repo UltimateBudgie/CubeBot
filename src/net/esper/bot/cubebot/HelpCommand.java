@@ -14,9 +14,9 @@ public class HelpCommand extends Command {
     public String getResponse() {
         String commandList = "";
         for (Command cmd : net.esper.bot.cubebot.Bot.commandList) {
-            commandList += " !" + cmd.getName();
+            commandList += " " + Bot.COMMANDTRIGGER + cmd.getName();
             for (String alias : cmd.getAliases()) {
-                commandList += " !" + alias;
+                commandList += " " + Bot.COMMANDTRIGGER + alias;
             }
         }
         return super.getResponse() + commandList;

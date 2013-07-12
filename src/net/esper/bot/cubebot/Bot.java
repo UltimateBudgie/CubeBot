@@ -16,6 +16,7 @@ public class Bot {
     public static List<Command> commandList;
     
     public static final Integer THROTTLEDURATION = 15;
+    public static final String COMMANDTRIGGER = "$";
 
     public static void main(String[] args) {
         Properties config;
@@ -56,6 +57,8 @@ public class Bot {
             System.err.println("Commands stored to memory.");
 
             PircBotX bot = new PircBotX();
+            
+//            bot.getUser("Texnical").
 
             System.err.println("CubeBot started.");
 

@@ -31,7 +31,7 @@ public class MessageListener extends ListenerAdapter {
         String messageOutput = e.getUser().getNick() + ": " + e.getMessage();
         System.err.println(messagePrefix + " " + messageOutput);
 
-        if (e.getMessage().startsWith("!")) {
+        if (e.getMessage().startsWith(Bot.COMMANDTRIGGER)) {
             args = e.getMessage().split(" ");
             if (args.length > 1) {
                 target = true;
