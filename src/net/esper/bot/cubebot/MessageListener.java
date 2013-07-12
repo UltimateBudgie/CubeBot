@@ -23,8 +23,8 @@ public class MessageListener extends ListenerAdapter {
     }
 
     private void checkMessages(org.pircbotx.hooks.types.GenericMessageEvent e, boolean quiet) {
-        String targetUser = null;
-        String args = "";
+        boolean target = false;
+        String args[];
         String commandString = e.getMessage().substring(1).split(" ")[0];
 
         String messagePrefix = "[" + ((quiet) ? "PRIVMSG" : ((MessageEvent) e).getChannel().getName()) + "]";
@@ -32,35 +32,25 @@ public class MessageListener extends ListenerAdapter {
         System.err.println(messagePrefix + " " + messageOutput);
 
         if (e.getMessage().startsWith("!")) {
-            if (e.getMessage().split(" ").length > 1) {
-                targetUser = e.getMessage().substring(1).split(" ")[1];
-
-                if (e.getMessage().split(" ").length > 2) {
-                    args += e.getMessage().split(" ")[2];
-
-                    for (int i = 3; i < e.getMessage().split(" ").length; i++) {
-                        args += " " + e.getMessage().split(" ")[i];
-                    }
-                }
+            args = e.getMessage().split(" ");
+            if (args.length > 1) {
+                target = true;
             }
 
             for (Command chatCommand : net.esper.bot.cubebot.Bot.commandList) {
                 if (chatCommand.matches(commandString)) {
-                    if (chatCommand.getName().matches("wiki")) {
-                        args = args.replace(" ", "%20");
-                    }
-                    sendMessage(e, chatCommand.getResponse(), args, quiet, targetUser);
+                    chatCommand.respond(e, args, quiet, target);
                 }
             }
         }
     }
 
-    private void sendMessage(GenericMessageEvent e, String message, String args, boolean quiet, String targetUser) {
+    private void sendMessage(GenericMessageEvent e, String message, String[] args, boolean quiet, boolean target) {
         if (quiet) {
             e.respond(message);
 //            e.getUser().sendMessage(message);
         } else {
-            ((MessageEvent) e).getChannel().sendMessage(((targetUser != null) ? (targetUser + ": ") : "") + String.format(message, args));
+//            ((MessageEvent) e).getChannel().sendMessage(((target != null) ? (target + ": ") : "") + String.format(message, String.args));
         }
     }
 }

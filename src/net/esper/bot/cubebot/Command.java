@@ -2,6 +2,7 @@ package net.esper.bot.cubebot;
 
 import java.util.LinkedList;
 import java.util.List;
+import org.pircbotx.hooks.types.GenericMessageEvent;
 
 /**
  *
@@ -23,6 +24,8 @@ public abstract class Command {
      */
     private List<String> aliases;
     
+    private Long timeLastUsed = null;
+    
     public Command(String name, String response) {
         this.name = name;
         this.response = response;
@@ -35,6 +38,14 @@ public abstract class Command {
 
     public String getResponse() {
         return response;
+    }
+
+    public Long getTimeLastUsed() {
+        return timeLastUsed;
+    }
+
+    public void updateTimeLastUsed() {
+        this.timeLastUsed = System.currentTimeMillis();
     }
 
     /**
@@ -73,5 +84,14 @@ public abstract class Command {
 
     public List<String> getAliases() {
         return aliases;
+    }
+    
+    public void respond(GenericMessageEvent e, String[] args, boolean quiet, boolean target) {
+        if (getTimeLastUsed() < System.currentTimeMillis() + Bot.THROTTLEDURATION * 1000L)
+            return;
+        
+        e.respond(((target) ? args[2] + ": " : "") + this.getResponse());
+        
+        updateTimeLastUsed();
     }
 }

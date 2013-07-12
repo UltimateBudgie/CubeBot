@@ -14,6 +14,8 @@ public class Bot {
     private static String[] statusChannelList = {"cubeworld-status"};
     private static Integer channelSize = channelList.length;
     public static List<Command> commandList;
+    
+    public static final Integer THROTTLEDURATION = 15;
 
     public static void main(String[] args) {
         Properties config;
